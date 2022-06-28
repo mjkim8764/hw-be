@@ -1,4 +1,4 @@
-package model.entity;
+package com.camping.dev.model.entity;
 
 import lombok.Data;
 
@@ -18,4 +18,5 @@ public class Review {
     private String review;
 
     private Boolean deleteYN;
+
 }

@@ -1,4 +1,4 @@
-package model.entity;
+package com.camping.dev.model.entity;
 
 import lombok.Data;
 
