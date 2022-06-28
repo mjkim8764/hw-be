@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camping.dev.mapper.GoodsMapper">
+
+    <select id="getSampleList" resultType="com.camping.dev.model.vo.GoodsSampleVO">
+        <![CDATA[
+        select id, category, name, image_url, price
+        from GOODS_SAMPLE
+        ]]>
+    </select>
+
+</mapper>
