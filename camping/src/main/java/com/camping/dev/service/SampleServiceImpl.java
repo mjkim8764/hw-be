@@ -20,12 +20,7 @@ public class SampleServiceImpl implements SampleService {
         logger.info("getSample called!");
 
         SampleVO sampleVO = sampleMapper.getSample("aaa");
-        logger.info(sampleVO.getAaa());
-        logger.info(sampleVO.getBbb());
-        logger.info(sampleVO.getCcc());
-        logger.info(sampleVO.getDdd());
-
-        return null;
+        return sampleVO;
 
     }
 
