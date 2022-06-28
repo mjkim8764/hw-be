@@ -5,6 +5,8 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +20,13 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"com.camping.dev.service"})
 @MapperScan(basePackages = {"com.camping.dev.mapper"})
 public class RootConfig {
+
+    private final ApplicationContext applicationContext;
+
+    @Autowired
+    RootConfig(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     @Bean
     public DataSource dataSource() {
@@ -47,6 +56,7 @@ public class RootConfig {
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource());
+        sqlSessionFactory.setMapperLocations(applicationContext.getResources("classpath:/com.camping.dev.mapper/*.xml"));
         return (SqlSessionFactory) sqlSessionFactory.getObject();
     }
 
