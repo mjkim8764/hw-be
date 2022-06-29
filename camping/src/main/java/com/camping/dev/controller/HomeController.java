@@ -21,7 +21,7 @@ public class HomeController {
 
     private final Logger logger = LoggerFactory.getLogger("SampleController's Log");
 
-    @PostMapping("/")
+    @GetMapping("/")
     public @ResponseBody
     List<GoodsSampleVO> getSampleList() {
 
