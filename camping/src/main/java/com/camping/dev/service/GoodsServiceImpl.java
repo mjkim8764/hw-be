@@ -21,6 +21,8 @@ public class GoodsServiceImpl implements GoodsService{
 
         logger.info("getSampleList called!");
 
+        // read main_data.csv
+
         return goodsMapper.getSampleList();
 
     }
