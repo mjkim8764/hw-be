@@ -17,8 +17,8 @@ public class Goods {
     // 상품 대여 가격
     private Long price;
 
-    // 상품 조회수
-    private Long view;
+    // 상품 리뷰수
+    private Long reviews;
 
     // 상품 등록 일자
     private String registerDate;

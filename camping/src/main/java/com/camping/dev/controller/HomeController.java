@@ -22,10 +22,7 @@ public class HomeController {
     @GetMapping("/")
     public @ResponseBody
     List<GoodsSampleVO> getSampleList() {
-
-        logger.info("HomeController called!");
         return goodsService.getSampleList();
-
     }
 
 }

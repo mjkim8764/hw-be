@@ -15,7 +15,7 @@ public class Review {
     private String email;
 
     // 리뷰 평점
-    private Long grade;
+    private int grade;
 
     // 긍부정 판별
     private Boolean result_yn;

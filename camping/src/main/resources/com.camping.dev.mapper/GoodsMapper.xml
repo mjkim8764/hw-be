@@ -13,8 +13,13 @@
     </select>
 
     <insert id="insertSampleData" parameterType="map">
-        insert into GOODS_SAMPLE (category, name, price, reviews, image_Url)
-        values (#{category}, #{name}, #{price}, #{reviews}, #{imageUrl})
+        insert into GOODS_SAMPLE (prd_id, category, name, price, reviews, image_Url)
+        values (#{prdId}, #{category}, #{name}, #{price}, #{reviews}, #{imageUrl})
+    </insert>
+
+    <insert id="insertInitData" parameterType="map">
+        insert into GOODS (prd_id_tmp, category, name, price, reviews, image_url)
+        values (#{prdId}, #{category}, #{name}, #{price}, #{reviews}, #{imageUrl})
     </insert>
 
     <select id="getCount" resultType="int">
