@@ -26,4 +26,11 @@
         ]]>
     </update>
 
+    <!-- 상품 아이디로 리뷰 작성자 및 내용 검색 -->
+    <select id="getReview" resultType="com.camping.dev.model.vo.ReviewVO" parameterType="java.lang.Integer">
+        select email, review, grade
+        from REVIEW
+        where prd_id = #{id}
+    </select>
+
 </mapper>

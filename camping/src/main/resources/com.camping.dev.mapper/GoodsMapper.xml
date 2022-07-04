@@ -22,11 +22,39 @@
         values (#{prdId}, #{category}, #{name}, #{price}, #{reviews}, #{imageUrl})
     </insert>
 
-    <select id="getCount" resultType="int">
+    <select id="getCount" parameterType="map" resultType="int">
         <![CDATA[
         select count(*)
         from GOODS_SAMPLE
         ]]>
+    </select>
+
+    <!-- 상품 아이디로 이름 찾기 -->
+    <select id="getName" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select name
+        from GOODS
+        where id = #{id}
+    </select>
+
+    <!-- 상품 아이디로 이미지 url 찾기 -->
+    <select id="getImageUrl" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select image_url
+        from GOODS
+        where id = #{id}
+    </select>
+
+    <!-- 상품 아이디로 가격 찾기 -->
+    <select id="getPrice" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select price
+        from GOODS
+        where id = #{id}
+    </select>
+
+    <!-- 상품 아이디로 리뷰 수 찾기 -->
+    <select id="getReviews" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select reviews
+        from GOODS
+        where id = #{id}
     </select>
 
 </mapper>

@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,10 +37,22 @@ public class GoodsServiceImpl implements GoodsService{
 
     }
 
+    // 상품 상세 페이지 로딩
     @Override
     public GoodsDetailVO getGoodsDetail(int id){
 
-        return null;
+        logger.info(Integer.toString(id));
+
+        GoodsDetailVO goodsDetail = new GoodsDetailVO();
+        goodsDetail.setName(goodsMapper.getName(id));
+        goodsDetail.setImageUrl(goodsMapper.getImageUrl(id));
+        goodsDetail.setPrice(goodsMapper.getPrice(id));
+        goodsDetail.setReviews(goodsMapper.getReviews(id));
+        goodsDetail.setGoodsInfo("");
+        goodsDetail.setReview(reviewMapper.getReview(id));
+
+        return goodsDetail;
+
     }
 
     // 메인 화면 굿즈 데이터 DB 에 적재

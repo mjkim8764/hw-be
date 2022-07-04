@@ -1,6 +1,9 @@
 package com.camping.dev.mapper;
 
+import com.camping.dev.model.vo.ReviewVO;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ReviewMapper {
 
@@ -15,5 +18,8 @@ public interface ReviewMapper {
 
     // 리뷰 테이블에 상품 테이블의 id update
     public void updateId();
+
+    // 상품 아이디로 리뷰 작성자 및 내용 검색
+    public List<ReviewVO> getReview(int id);
 
 }

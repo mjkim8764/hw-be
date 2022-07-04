@@ -19,16 +19,10 @@ public class GoodsDetailVO {
     // reviews : 리뷰 수
     private int reviews;
 
-    // grade : 리뷰 평점
-    private int grade;
-
     // goodsInfo : 상품 상세정보
     private String goodsInfo;
 
-    // review : 리뷰내용
-    private List<String> review;
-
-    // reviewWriter : 리뷰작성자
-    private String reviewWriter;
+    // review : 리뷰내용 (이메일, 리뷰내용, 리뷰평점)
+    private List<ReviewVO> review;
 
 }
