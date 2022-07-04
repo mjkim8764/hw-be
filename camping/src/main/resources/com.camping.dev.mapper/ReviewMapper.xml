@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camping.dev.mapper.ReviewMapper">
+
+    <select id="getCount" resultType="int">
+        <![CDATA[
+        select count(*)
+        from REVIEW
+        ]]>
+    </select>
+
+    <insert id="insertInitData" parameterType="map">
+        insert into REVIEW (prd_id_tmp, email, grade, review)
+        values (#{prdId}, #{userId}, #{grade}, #{review})
+    </insert>
+
+    <update id="updateId">
+        <![CDATA[
+            update review r
+            join goods g
+            on r.prd_id_tmp=g.prd_id_tmp
+            set r.prd_id=g.id;
+        ]]>
+    </update>
+
+    <!-- 상품 아이디로 리뷰 작성자 및 내용 검색 -->
+    <select id="getReview" resultType="com.camping.dev.model.vo.ReviewVO" parameterType="java.lang.Integer">
+        select email, review, grade
+        from REVIEW
+        where prd_id = #{id}
+    </select>
+
+</mapper>

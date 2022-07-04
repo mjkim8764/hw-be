@@ -1,6 +1,8 @@
 package com.camping.dev.service;
 
 import com.camping.dev.mapper.GoodsMapper;
+import com.camping.dev.mapper.ReviewMapper;
+import com.camping.dev.model.vo.GoodsDetailVO;
 import com.camping.dev.model.vo.GoodsSampleVO;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +24,7 @@ import java.util.List;
 public class GoodsServiceImpl implements GoodsService{
 
     private GoodsMapper goodsMapper;
+    private ReviewMapper reviewMapper;
     private final ClassPathResource mainCsvResource = new ClassPathResource("csv/main_page_data_renew.csv");
     private final Logger logger = LoggerFactory.getLogger("GoodsServiceImpl's log");
 
@@ -33,10 +37,28 @@ public class GoodsServiceImpl implements GoodsService{
 
     }
 
+    // 상품 상세 페이지 로딩
+    @Override
+    public GoodsDetailVO getGoodsDetail(int id){
+
+        logger.info(Integer.toString(id));
+
+        GoodsDetailVO goodsDetail = new GoodsDetailVO();
+        goodsDetail.setName(goodsMapper.getName(id));
+        goodsDetail.setImageUrl(goodsMapper.getImageUrl(id));
+        goodsDetail.setPrice(goodsMapper.getPrice(id));
+        goodsDetail.setReviews(goodsMapper.getReviews(id));
+        goodsDetail.setGoodsInfo("");
+        goodsDetail.setReview(reviewMapper.getReview(id));
+
+        return goodsDetail;
+
+    }
+
     // 메인 화면 굿즈 데이터 DB 에 적재
     @PostConstruct
     public void readMainDataCsvAndInsert() {
-        BufferedReader reader = null;
+        BufferedReader goodsReader = null;
 
         int count = goodsMapper.getCount();
 
@@ -44,23 +66,24 @@ public class GoodsServiceImpl implements GoodsService{
         if (count == 0) {
 
             try {
-                reader = Files.newBufferedReader(Paths.get(mainCsvResource.getURI()));
-                String line = "";
+                goodsReader = Files.newBufferedReader(Paths.get(mainCsvResource.getURI()));
+                String goodsLine = "";
 
                 // read first line(column)
-                String tmp = reader.readLine();
+                String tmpGoods = goodsReader.readLine();
 
-                while ((line = reader.readLine()) != null) {
+                while ((goodsLine = goodsReader.readLine()) != null) {
 
-                    String goodsDetail[] = line.split(",");
+                    String goodsDetail[] = goodsLine.split(",");
+                    String prdId = goodsDetail[0];
                     String category = goodsDetail[1];
                     String name = goodsDetail[2];
                     int price = Integer.parseInt(goodsDetail[3]);
                     int reviews = Integer.parseInt(goodsDetail[4]);
                     String imageUrl = goodsDetail[5];
 
-                    goodsMapper.insertSampleData(category, name, price, reviews, imageUrl);
-
+                    goodsMapper.insertSampleData(prdId, category, name, price, reviews, imageUrl);
+                    goodsMapper.insertInitData(prdId, category, name, price, reviews, imageUrl);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -68,8 +91,8 @@ public class GoodsServiceImpl implements GoodsService{
                 e.printStackTrace();
             } finally {
                 try {
-                    if (reader != null) {
-                        reader.close();
+                    if (goodsReader != null) {
+                        goodsReader.close();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

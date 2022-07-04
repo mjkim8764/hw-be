@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface GoodsMapper {
 
-    // 초기 데이터 적재
-    public void insertSampleData(@Param("category") String category,
+    // 초기 데이터 적재 (샘플)
+    public void insertSampleData(@Param("prdId") String prdId,
+                                 @Param("category") String category,
                                  @Param("name") String name,
                                  @Param("price") int price,
                                  @Param("reviews") int reviews,
@@ -19,5 +20,25 @@ public interface GoodsMapper {
 
     // 서버 재실행 시 상품테이블에 데이터가 있는지 확인
     public int getCount();
+
+    // 초기 상품 데이터 적재
+    public void insertInitData(@Param("prdId") String prdId,
+                               @Param("category") String category,
+                               @Param("name") String name,
+                               @Param("price") int price,
+                               @Param("reviews") int reviews,
+                               @Param("imageUrl") String imageUrl);
+
+    // 상품 아이디로 이름 찾기
+    public String getName(int id);
+
+    // 상품 아이디로 이미지 url 찾기
+    public String getImageUrl(int id);
+
+    // 상품 아이디로 가격 찾기
+    public int getPrice(int id);
+
+    // 상품 아이디로 리뷰 수 찾기
+    public int getReviews(int id);
 
 }
