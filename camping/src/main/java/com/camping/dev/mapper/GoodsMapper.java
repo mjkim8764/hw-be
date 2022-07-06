@@ -1,5 +1,6 @@
 package com.camping.dev.mapper;
 
+import com.camping.dev.model.vo.GoodsInfoVO;
 import com.camping.dev.model.vo.GoodsSampleVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,16 +30,7 @@ public interface GoodsMapper {
                                @Param("reviews") int reviews,
                                @Param("imageUrl") String imageUrl);
 
-    // 상품 아이디로 이름 찾기
-    public String getName(int id);
-
-    // 상품 아이디로 이미지 url 찾기
-    public String getImageUrl(int id);
-
-    // 상품 아이디로 가격 찾기
-    public int getPrice(int id);
-
-    // 상품 아이디로 리뷰 수 찾기
-    public int getReviews(int id);
+    // 상품 아이디로 상품 정보 찾기
+    public GoodsInfoVO getGoodsInfo(int id);
 
 }
