@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService{
 
     private final Logger logger = LoggerFactory.getLogger("MemberServiceImpl's log");
 
-    public String registerMember(MemberRegisterVO memberRegisterVO) {
+    public MemberRegisterVO registerMember(MemberRegisterVO memberRegisterVO) {
 
         String encrypted = bcrypt.encrypt(memberRegisterVO.getPassword());
         memberRegisterVO.setPassword(encrypted);
@@ -29,15 +29,13 @@ public class MemberServiceImpl implements MemberService{
         Member member = new Member();
         BeanUtils.copyProperties(memberRegisterVO, member);
 
-        String registerNotice;
-
         if (memberMapper.searchByEmail(member.getEmail()) == 0) {
             memberMapper.insertMemberInfo(member);
-            registerNotice = "register success";
+            memberRegisterVO.setStatus("register success");
         } else
-            registerNotice = "idDuplicate";
+            memberRegisterVO.setStatus("idDuplicate");
 
-        return registerNotice;
+        return memberRegisterVO;
 
     }
 
