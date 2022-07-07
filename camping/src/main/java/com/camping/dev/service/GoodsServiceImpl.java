@@ -47,13 +47,6 @@ public class GoodsServiceImpl implements GoodsService{
         GoodsDetailVO goodsDetail = new GoodsDetailVO();
         GoodsInfoVO goodsInfo = goodsMapper.getGoodsInfo(id);
 
-        /*
-        goodsDetail.setName(goodsInfo.getName());
-        goodsDetail.setImageUrl(goodsInfo.getImageUrl());
-        goodsDetail.setPrice(goodsInfo.getPrice());
-        goodsDetail.setReviews(goodsInfo.getReviews());
-        */
-
         BeanUtils.copyProperties(goodsInfo, goodsDetail);
         goodsDetail.setGoodsInfo("");
         goodsDetail.setReview(reviewMapper.getReview(id));

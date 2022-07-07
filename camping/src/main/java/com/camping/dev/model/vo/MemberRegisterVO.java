@@ -1,9 +1,9 @@
-package com.camping.dev.model.entity;
+package com.camping.dev.model.vo;
 
 import lombok.Data;
 
 @Data
-public class Member {
+public class MemberRegisterVO {
 
     // 이메일
     private String email;
@@ -13,8 +13,5 @@ public class Member {
 
     // 이름
     private String name;
-
-    // 평점
-    private Long grade;
 
 }

@@ -18,8 +18,24 @@
     </select>
 
     <insert id="insertSampleData" parameterType="map">
-        INSERT INTO GOODS_SAMPLE (prd_id, category, name, price, reviews, image_Url)
-        VALUES (#{prdId}, #{category}, #{name}, #{price}, #{reviews}, #{imageUrl})
+        INSERT INTO
+            GOODS_SAMPLE
+            (
+                prd_id
+              , category
+              , name
+              , price
+              , reviews
+              , image_Url
+            )
+            VALUES (
+                #{prdId}
+              , #{category}
+              , #{name}
+              , #{price}
+              , #{reviews}
+              , #{imageUrl}
+            )
     </insert>
 
     <insert id="insertInitData" parameterType="map">

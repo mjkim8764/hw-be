@@ -1,6 +1,5 @@
 package com.camping.dev.service;
 
-import com.camping.dev.mapper.GoodsMapper;
 import com.camping.dev.mapper.ReviewMapper;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
