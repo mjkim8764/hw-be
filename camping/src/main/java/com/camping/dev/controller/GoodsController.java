@@ -20,7 +20,8 @@ public class GoodsController {
     @GetMapping("/{id}")
     public @ResponseBody
     GoodsDetailVO getGoodsDetail(@PathVariable("id") int id) {
-        return goodsService.getGoodsDetail(id);
+        GoodsDetailVO resultVO = goodsService.getGoodsDetail(id);
+        return resultVO;
     }
 
 }

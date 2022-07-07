@@ -45,3 +45,10 @@ create table REVIEW(
     delete_yn boolean
 );
 
+# Member 테이블
+create table MEMBER(
+    email varchar(50) not null primary key,
+    password varchar(255) not null,
+    name varchar(50) not null,
+    grade int(10)
+);

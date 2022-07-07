@@ -3,10 +3,12 @@ package com.camping.dev.service;
 import com.camping.dev.mapper.GoodsMapper;
 import com.camping.dev.mapper.ReviewMapper;
 import com.camping.dev.model.vo.GoodsDetailVO;
+import com.camping.dev.model.vo.GoodsInfoVO;
 import com.camping.dev.model.vo.GoodsSampleVO;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,10 +45,9 @@ public class GoodsServiceImpl implements GoodsService{
         logger.info(Integer.toString(id));
 
         GoodsDetailVO goodsDetail = new GoodsDetailVO();
-        goodsDetail.setName(goodsMapper.getName(id));
-        goodsDetail.setImageUrl(goodsMapper.getImageUrl(id));
-        goodsDetail.setPrice(goodsMapper.getPrice(id));
-        goodsDetail.setReviews(goodsMapper.getReviews(id));
+        GoodsInfoVO goodsInfo = goodsMapper.getGoodsInfo(id);
+
+        BeanUtils.copyProperties(goodsInfo, goodsDetail);
         goodsDetail.setGoodsInfo("");
         goodsDetail.setReview(reviewMapper.getReview(id));
 

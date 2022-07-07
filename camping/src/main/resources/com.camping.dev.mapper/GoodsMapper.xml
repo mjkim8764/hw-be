@@ -7,54 +7,74 @@
 
     <select id="getSampleList" resultType="com.camping.dev.model.vo.GoodsSampleVO">
         <![CDATA[
-        select id, category, name, price, reviews, image_url
-        from GOODS_SAMPLE
+            SELECT id
+                 , category
+                 , name
+                 , price
+                 , reviews
+                 , image_url
+            FROM GOODS_SAMPLE
         ]]>
     </select>
 
     <insert id="insertSampleData" parameterType="map">
-        insert into GOODS_SAMPLE (prd_id, category, name, price, reviews, image_Url)
-        values (#{prdId}, #{category}, #{name}, #{price}, #{reviews}, #{imageUrl})
+        INSERT INTO
+            GOODS_SAMPLE
+            (
+                prd_id
+              , category
+              , name
+              , price
+              , reviews
+              , image_Url
+            )
+            VALUES (
+                #{prdId}
+              , #{category}
+              , #{name}
+              , #{price}
+              , #{reviews}
+              , #{imageUrl}
+            )
     </insert>
 
     <insert id="insertInitData" parameterType="map">
-        insert into GOODS (prd_id_tmp, category, name, price, reviews, image_url)
-        values (#{prdId}, #{category}, #{name}, #{price}, #{reviews}, #{imageUrl})
+        INSERT INTO
+            GOODS
+            (
+              prd_id_tmp
+            , category
+            , name
+            , price
+            , reviews
+            , image_url
+            )
+            VALUES
+            (
+              #{prdId}
+            , #{category}
+            , #{name}
+            , #{price}
+            , #{reviews}
+            , #{imageUrl}
+            )
     </insert>
 
     <select id="getCount" parameterType="map" resultType="int">
         <![CDATA[
-        select count(*)
-        from GOODS_SAMPLE
+            SELECT count(*)
+            FROM GOODS_SAMPLE
         ]]>
     </select>
 
-    <!-- 상품 아이디로 이름 찾기 -->
-    <select id="getName" resultType="java.lang.String" parameterType="java.lang.Integer">
-        select name
-        from GOODS
-        where id = #{id}
-    </select>
-
-    <!-- 상품 아이디로 이미지 url 찾기 -->
-    <select id="getImageUrl" resultType="java.lang.String" parameterType="java.lang.Integer">
-        select image_url
-        from GOODS
-        where id = #{id}
-    </select>
-
-    <!-- 상품 아이디로 가격 찾기 -->
-    <select id="getPrice" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        select price
-        from GOODS
-        where id = #{id}
-    </select>
-
-    <!-- 상품 아이디로 리뷰 수 찾기 -->
-    <select id="getReviews" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        select reviews
-        from GOODS
-        where id = #{id}
+    <!-- 상품 아이디로 상품 정보 찾기 -->
+    <select id="getGoodsInfo" resultType="com.camping.dev.model.vo.GoodsInfoVO" parameterType="java.lang.Integer">
+        SELECT name
+             , image_url
+             , price
+             , reviews
+          FROM GOODS
+         WHERE id = #{id}
     </select>
 
 </mapper>
