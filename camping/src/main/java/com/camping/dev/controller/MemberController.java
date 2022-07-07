@@ -18,9 +18,9 @@ public class MemberController {
     private final Logger logger = LoggerFactory.getLogger("MemberController's Log");
 
     @PostMapping("/register")
-    public String registerMember(@RequestBody MemberRegisterVO memberRegisterVO) {
-        String msg = memberService.registerMember(memberRegisterVO);
-        return msg;
+    public MemberRegisterVO registerMember(@RequestBody MemberRegisterVO memberRegisterVO) {
+        MemberRegisterVO resultVO = memberService.registerMember(memberRegisterVO);
+        return resultVO;
     }
 
 }

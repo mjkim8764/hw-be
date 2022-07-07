@@ -14,4 +14,7 @@ public class MemberRegisterVO {
     // 이름
     private String name;
 
+    // 상태
+    private String status;
+
 }
