@@ -1,8 +1,5 @@
 package com.camping.dev.controller;
 
-import com.camping.dev.model.vo.AuthInfoVO;
-import com.camping.dev.model.vo.LoginInfoVO;
-import com.camping.dev.model.vo.LoginResultVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
