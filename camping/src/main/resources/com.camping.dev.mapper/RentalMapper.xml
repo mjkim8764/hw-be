@@ -32,12 +32,28 @@
             )
             VALUES
             (
-                #{prdId}
+                #{id}
               , #{email}
               , #{rentalStartDate}
               , #{rentalEndDate}
               , '01'
             )
     </insert>
+
+    <select id="getRentInfo" parameterType="com.camping.dev.model.vo.RentInfoRequestVO"
+                             resultType="com.camping.dev.model.vo.RentInfoVO">
+    SELECT g.id
+         , g.name
+         , g.image_url
+         , g.price
+         , r.lender_email
+         , r.rental_start_date
+         , r.rental_end_date
+         , r.rent_status
+      FROM GOODS AS g
+     RIGHT OUTER JOIN RENTAL as r
+        ON g.id = r.prd_id
+     WHERE r.borrower_email = #{email};
+    </select>
 
 </mapper>
