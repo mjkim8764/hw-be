@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class RentalRequestVO {
 
-    private int id;
+    private int prdId;
 
     private String email;
 
