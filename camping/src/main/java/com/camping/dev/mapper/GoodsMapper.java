@@ -20,8 +20,12 @@ public interface GoodsMapper {
                                @Param("category") String category,
                                @Param("name") String name,
                                @Param("price") int price,
-                               @Param("reviews") int reviews,
                                @Param("imageUrl") String imageUrl);
+
+    // 리뷰 테이블에서 추출한 상품별 리뷰 갯수 및 평균 평점을 상품 테이블에 적재
+    public void updateReviewAndGrade(@Param("prdIdTmp") String prdIdTmp,
+                                     @Param("cntReview") int cntReview,
+                                     @Param("avgGrade") double avgGrade);
 
     // 상품 아이디로 상품 정보 찾기
     public GoodsInfoVO getGoodsInfo(int id);

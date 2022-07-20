@@ -27,7 +27,6 @@
             , IMAGE_URL
             , PRICE
             , LENDER_EMAIL
-            , REVIEWS
             )
             VALUES
             (
@@ -37,9 +36,16 @@
             , #{imageUrl}
             , #{price}
             , #{email}
-            , #{reviews}
             )
     </insert>
+
+    <!-- 리뷰 테이블에서 추출한 상품별 리뷰 갯수 및 평균 평점을 상품 테이블에 적재 -->
+    <update id="updateReviewAndGrade" parameterType="map">
+        UPDATE GOODS
+           SET REVIEWS = #{cntReview}
+             , GRADE = #{avgGrade}
+         WHERE PRD_ID_TMP = #{prdIdTmp}
+    </update>
 
     <!-- 상품 아이디로 상품 등록자 email 검색 -->
     <select id="getLenderEmail" parameterType="java.lang.Integer" resultType="java.lang.String">

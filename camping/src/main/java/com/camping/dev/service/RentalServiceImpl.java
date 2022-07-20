@@ -7,9 +7,15 @@ import com.camping.dev.mapper.ReviewMapper;
 import com.camping.dev.model.vo.*;
 import lombok.AllArgsConstructor;
 import org.apache.ibatis.session.SqlSessionException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Service
 @AllArgsConstructor
@@ -109,6 +115,7 @@ public class RentalServiceImpl implements RentalService {
     public RentalResponseVO sendRentalReturn(RentalReturnVO rentalReturnVO) {
 
         RentalResponseVO resultVO = new RentalResponseVO();
+        HttpURLConnection conn = null;
 
         try {
 
@@ -119,7 +126,32 @@ public class RentalServiceImpl implements RentalService {
             resultVO.setStatus("6000");
 
 
-            // 리뷰메세지 삽입
+            /**
+             * 리뷰메세지를 리뷰테이블에 적재
+             * 리뷰테이블에 들어가는 평점은 ML 모델 API 에 리뷰메세지를 넣어서 추출한 값
+             */
+
+            /*
+            URL url = new URL("http://54.180.64.59:5000/predict");
+            conn = (HttpURLConnection)url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("text", rentalReturnVO.getReview());
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            while( (line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+            JSONObject obj = new JSONObject(sb.toString());
+
+            */
+
+
             reviewMapper.insertReview(rentalReturnVO.getId()
                                     , rentalReturnVO.getEmail()
                                     , rentalReturnVO.getGrade()
@@ -128,8 +160,8 @@ public class RentalServiceImpl implements RentalService {
             // 평점 수정
             CalculateNewGradeVO calculateNewGradeVO = memberMapper.selectTradedAndGrade(lenderEmail);
             int traded = calculateNewGradeVO.getTraded();
-            double grade = calculateNewGradeVO.getGrade();
-            double newGrade = ( (traded * grade) + rentalReturnVO.getGrade() ) / (traded + 1);
+            double userGrade = calculateNewGradeVO.getGrade();
+            double newGrade = ( (traded * userGrade) + rentalReturnVO.getGrade() ) / (traded + 1);
             newGrade = Math.round(newGrade * 10) / 10.0;
             memberMapper.updateTradedAndGrade(lenderEmail, traded + 1, newGrade);
 
