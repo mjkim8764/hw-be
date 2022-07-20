@@ -58,7 +58,7 @@
     </update>
 
     <!-- 회원의 기존 거래 건수와 평점 검색 -->
-    <select id="selectTradedAndGrade" parameterType="String" resultType="com.camping.dev.model.vo.CalculateNewGradeVO">
+    <select id="selectTradedAndGrade" parameterType="String" resultType="com.camping.dev.model.vo.CalculateUserGradeVO">
         SELECT TRADED, GRADE
           FROM MEMBER
          WHERE EMAIL = #{email}

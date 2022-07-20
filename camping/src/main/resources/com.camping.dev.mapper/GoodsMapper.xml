@@ -72,4 +72,19 @@
          WHERE ID = #{id}
     </select>
 
+    <!-- 상품 기존 리뷰수와 평점 검색 -->
+    <select id="selectReviewsAndGrade" parameterType="int" resultType="com.camping.dev.model.vo.CalculateGoodsGradeVO">
+        SELECT REVIEWS, GRADE
+        FROM GOODS
+        WHERE ID = #{id}
+    </select>
+
+    <!-- 상품 리뷰 수 및  평점 갱신 -->
+    <update id="updateNewReviewAndNewGrade" parameterType="map">
+        UPDATE GOODS
+        SET REVIEWS = #{reviews}
+          , GRADE = #{grade}
+        WHERE ID = #{id}
+    </update>
+
 </mapper>

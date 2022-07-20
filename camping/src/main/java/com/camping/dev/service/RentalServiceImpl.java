@@ -133,13 +133,22 @@ public class RentalServiceImpl implements RentalService {
                                     , rentalReturnVO.getReview());
 
 
-            // 평점 수정
-            CalculateNewGradeVO calculateNewGradeVO = memberMapper.selectTradedAndGrade(lenderEmail);
-            int traded = calculateNewGradeVO.getTraded();
-            double userGrade = calculateNewGradeVO.getGrade();
+            // 유저 평점 갱신
+            CalculateUserGradeVO calculateUserGradeVO = memberMapper.selectTradedAndGrade(lenderEmail);
+            int traded = calculateUserGradeVO.getTraded();
+            double userGrade = calculateUserGradeVO.getGrade();
             double newGrade = ( (traded * userGrade) + rentalReturnVO.getGrade() ) / (traded + 1);
             newGrade = Math.round(newGrade * 10) / 10.0;
             memberMapper.updateTradedAndGrade(lenderEmail, traded + 1, newGrade);
+
+
+            // 상품 평점 갱신
+            CalculateGoodsGradeVO calculateGoodsGradeVO = goodsMapper.selectReviewsAndGrade(rentalReturnVO.getId());
+            int reviews = calculateGoodsGradeVO.getReviews();
+            double goodsGrade = calculateGoodsGradeVO.getGrade();
+            double newGoodsGrade = ( (reviews * goodsGrade) + grade ) / (reviews + 1);
+            newGoodsGrade = Math.round(newGoodsGrade * 10) / 10.0;
+            goodsMapper.updateNewReviewAndNewGrade(rentalReturnVO.getId(), reviews + 1, newGoodsGrade);
 
         } catch (SqlSessionException e) {
             e.printStackTrace();
