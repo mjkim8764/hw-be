@@ -64,6 +64,7 @@
          WHERE EMAIL = #{email}
     </select>
 
+
     <!-- 거래 건수 및 평점 갱신 -->
     <update id="updateTradedAndGrade" parameterType="map">
         UPDATE MEMBER
@@ -71,5 +72,13 @@
              , GRADE = #{grade}
          WHERE EMAIL = #{email}
     </update>
+
+
+    <!-- 유저 평점 검색 -->
+    <select id="searchGrade" parameterType="com.camping.dev.model.vo.EmailRequestVO" resultType="double">
+        SELECT GRADE
+          FROM MEMBER
+         WHERE EMAIL = #{email}
+    </select>
 
 </mapper>
