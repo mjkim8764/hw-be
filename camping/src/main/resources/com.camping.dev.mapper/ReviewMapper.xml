@@ -25,8 +25,8 @@
 
     <update id="updateId">
         <![CDATA[
-            update review r
-            join goods g
+            update REVIEW r
+            join GOODS g
             on r.prd_id_tmp=g.prd_id_tmp
             set r.prd_id=g.id;
         ]]>

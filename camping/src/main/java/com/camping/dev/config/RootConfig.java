@@ -30,10 +30,10 @@ public class RootConfig {
     public DataSource dataSource() {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-        hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/hw_camping?serverTimezone=Asia/Seoul&characterEncoding=UTF-8");
+        hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://j-mysql-team.cqg6wzvrxiua.ap-northeast-2.rds.amazonaws.com:3306/hw_camping?serverTimezone=Asia/Seoul&characterEncoding=UTF-8");
 
-        hikariConfig.setUsername("root");
-        hikariConfig.setPassword("1234");
+        hikariConfig.setUsername("admin");
+        hikariConfig.setPassword("20220606");
 
         hikariConfig.setMinimumIdle(5);
         // test Query
