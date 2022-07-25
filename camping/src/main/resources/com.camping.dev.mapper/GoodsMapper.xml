@@ -7,12 +7,12 @@
 
     <select id="getSampleList" resultType="com.camping.dev.model.vo.GoodsSampleVO">
         <![CDATA[
-            SELECT id
-                 , category
-                 , name
-                 , price
-                 , reviews
-                 , image_url
+            SELECT ID
+                 , CATEGORY
+                 , NAME
+                 , PRICE
+                 , REVIEWS
+                 , IMAGE_URL
             FROM GOODS
         ]]>
     </select>

@@ -10,11 +10,11 @@
         INSERT INTO
             MEMBER
             (
-              email
-            , password
-            , name
-            , traded
-            , grade
+              EMAIL
+            , PASSWORD
+            , NAME
+            , TRADED
+            , GRADE
             )
             VALUES
             (
@@ -30,31 +30,31 @@
     <select id="searchByEmail" parameterType="String" resultType="int">
         SELECT COUNT(*)
         FROM MEMBER
-        WHERE email = #{email}
+        WHERE EMAIL = #{email}
     </select>
 
     <!-- 로그인(아이디, 패스워드 검색) -->
     <select id="loginByEmail" parameterType="String" resultType="com.camping.dev.model.vo.LoginCompareVO">
         SELECT
-            email
-          , password
-          , name
+            EMAIL
+          , PASSWORD
+          , NAME
          FROM MEMBER
-        WHERE email = #{email}
+        WHERE EMAIL = #{email}
     </select>
 
     <!-- 해쉬값 검색 -->
     <select id="searchHashedByEmail" parameterType="String" resultType="String">
-        SELECT password
+        SELECT PASSWORD
         FROM MEMBER
-        WHERE email = #{email}
+        WHERE EMAIL = #{email}
     </select>
 
     <!-- 비밀번호 수정 -->
     <update id="modifyPassword" parameterType="map">
         UPDATE MEMBER
-           SET password = #{password}
-         WHERE email = #{email}
+           SET PASSWORD = #{password}
+         WHERE EMAIL = #{email}
     </update>
 
     <!-- 회원의 기존 거래 건수와 평점 검색 -->
